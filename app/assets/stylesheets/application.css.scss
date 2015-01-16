@@ -2,5 +2,17 @@
 @import "bootstrap";
 
 body {
-  padding-top: 50px;
+  padding-top: 60px;
+}
+
+footer {
+  padding: 1em 0;
+  margin-top: 1em;
+  border-top: 1px solid #ccc;
+}
+
+.img-footer {
+  max-width: 2em;
+  max-height: 2em;
+  margin-right: .5em;
 }
