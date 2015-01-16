@@ -1,0 +1,46 @@
+%html
+  .jumbotron
+    %h1 gCamp
+    %p Your life, organized.
+
+  / Example row of columns
+  .row
+    .col-md-4
+      %p.lead
+        = image_tag("8969237967_c5960fc544_b.jpg", alt: "Panel1", class: "img-responsive")
+
+      .panel.panel-primary
+        .panel-heading Tasks
+        .panel-body.home-panel
+          %p Grouped by projects and lists, just the way you like'em
+
+    .col-md-4
+      %p.lead
+        = image_tag("8864977481_713b7cbda5_b.jpg", alt: "Panel2", class: "img-responsive")
+      .panel.panel-primary
+        .panel-heading Documents
+        .panel-body.home-panel
+          %ul
+            %li Upload
+            %li Comment
+            %li Revise
+
+    .col-md-4
+      %p.lead
+        = image_tag("8203794182_8004f8f636_b.jpg", alt: "Panel3", class: "img-responsive")
+      .panel.panel-primary
+        .panel-heading Comments
+        .panel-body.home-panel
+          %ul
+            %li Comment on tasks and documents
+            %li Get email notifications
+
+  %p "gCamp has changed my life! It's the best tool I've ever used."
+  %p.text-muted
+    %em — Cayla Hayes
+  %p "Before gCamp I was a disorderly slob. Now I'm more organized than I've ever been"
+  %p.text-muted
+    %em — Leta Jaskolski
+  %p "Don't hesitate - sign up right now! You'll never be the same."
+  %p.text-muted
+    %em — Lavern Upton
