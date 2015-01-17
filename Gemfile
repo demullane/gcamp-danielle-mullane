@@ -31,7 +31,10 @@ gem 'haml'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+
+# Generates a stacktrace in the logs that can be used for future debugging of long running code
+gem 'rack-timeout'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
