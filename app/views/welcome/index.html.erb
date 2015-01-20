@@ -50,7 +50,15 @@
 
       </div>
 
-  <p>
+  <ul>
+    <% @quotes.each do |quote| %>
+      <p><%= quote[0] %>
+        <br /><% quote[1] %>
+      </p>
+    <% end %>
+  </ul>
+
+  <!-- <p>
     "gCamp has changed my life! It's the best tool I've ever used."
   </p>
   <p class = "text-muted">
@@ -67,4 +75,4 @@
   </p>
   <p class = "text-muted">
     <em>— Lavern Upton</em>
-  </p>
+  </p> -->
