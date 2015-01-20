@@ -50,13 +50,14 @@
 
       </div>
 
-  <ul>
+  <div>
     <% @quotes.each do |quote| %>
-      <p><%= quote[0] %>
-        <br /><% quote[1] %>
+      <p>
+        <%= quote[0] %>
+        <br /><span class = "text-muted"><em><%= quote[1] %></em></span><br />
       </p>
     <% end %>
-  </ul>
+  </div>
 
   <!-- <p>
     "gCamp has changed my life! It's the best tool I've ever used."
