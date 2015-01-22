@@ -4,12 +4,12 @@
 
       <% @questionscomb.each do |arr| %>
         <ul>
-          <li><%= link_to arr.question, "#arr.slug" %></li>
+          <li><%= link_to arr.question, "#" + arr.slug %></li>
         </ul>
       <% end %>
 
       <% @questionscomb.each do |arr| %>
-        <a id = "arr.slug"></a>
+        <a id = "<%= arr.slug %>"></a>
         <h3><%= arr.question %></h3>
         <p><%= arr.answer %></p>
         <p><%= link_to "Top", "#top" %></p>
