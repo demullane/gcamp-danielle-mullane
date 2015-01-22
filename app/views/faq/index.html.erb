@@ -8,9 +8,14 @@
         </ul>
       <% end %>
 
+
       <% @questionscomb.each do |arr| %>
-        <a id = "<%= arr.slug %>"></a>
-        <h3><%= arr.question %></h3>
-        <p><%= arr.answer %></p>
-        <p><%= link_to "Top", "#top" %></p>
+        <div class = "row">
+          <div class = "col-md-6">
+            <a id = "<%= arr.slug %>"></a>
+            <strong><%= arr.question %></strong>
+            <p><%= arr.answer %></p>
+            <p style = "text-decoration: underline"><%= link_to "Top", "#top" %></p>
+          </div>
+        </div>
       <% end %>
