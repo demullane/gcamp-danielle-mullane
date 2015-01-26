@@ -1,10 +1,13 @@
       <div class = "page-header">
-        <h1>Listing Tasks</h1>
+        <div class = "pull-right">
+          <%= link_to 'New Task', new_task_path, class: "btn btn-info" %>
+        </div>
+        <h1>Tasks</h1>
       </div>
 
       <p id="notice"><%= notice %></p>
 
-      <table>
+      <table class = "table">
         <thead>
           <tr>
             <th>Description</th>
@@ -16,14 +19,12 @@
           <% @tasks.each do |task| %>
             <tr>
               <td><%= task.description %></td>
-              <td><%= link_to 'Show', task %></td>
-              <td><%= link_to 'Edit', edit_task_path(task) %></td>
-              <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <!-- <td><%= link_to 'Show', task %></td> -->
+              <td class = "text-right">
+                <%= link_to 'Edit', edit_task_path(task), class: "btn btn-info" %>
+                <%= link_to 'Delete', task, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-
-      <br>
-
-      <%= link_to 'New Task', new_task_path %>
