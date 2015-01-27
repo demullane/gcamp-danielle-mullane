@@ -1,21 +1,27 @@
-<%= form_for(@task) do |f| %>
+<%= form_for @task, html: {class: "form-horizontal"} do |f| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
       <ul>
-      <% @task.errors.full_messages.each do |message| %>
+        <% @task.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <form class = "form-horizontal">
+    <div class= "form-group">
+      <%= f.label :description, class: "control-label col-md-2" %>
+      <div class = "form-controls col-md-4">
+        <%= f.text_field :description, class: "form-control" %>
+      </div>
+    </div>
+    <div class = "form-group">
+      <div class = "col-md-offset-2 col-md-4">
+        <%= f.submit "Create Task", class: "btn btn-primary" %>
+        <%= link_to "Cancel", "/tasks", class: "btn btn-default" %>
+      </div>
+    </div>
+  </form>
 <% end %>
