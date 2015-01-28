@@ -18,12 +18,18 @@
             </div>
           </div>
           <div class = "form-group">
+            <%= f.label :task_due_date, "Due Date", class: "control-label col-md-2" %>
+            <div class = "form-controls col-md-4">
+              <%= f.date_select :task_due_date, class: "form-control" %>
+            </div>
+          </div>
+          <div class = "form-group">
             <div class = "col-md-offset-2 col-md-4">
               <% if @task.new_record? %>
                 <%= f.submit "Create Task", class: "btn btn-primary" %>
                 <%= link_to "Cancel", "/tasks", class: "btn btn-default" %>
               <% else %>
-                <%= f.submit "Edit Task", class: "btn btn-primary" %>
+                <%= f.submit "Update Task", class: "btn btn-primary" %>
                 <%= link_to "Cancel", "/tasks", class: "btn btn-default" %>
               <% end %>
             </div>
