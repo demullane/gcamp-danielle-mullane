@@ -1,9 +1,8 @@
 gCamp Project
 
-== README
-
-* Ruby version
-  2.2.0
+```
+Ruby Version: 2.2.0
+```
 
 [View on Heroku](https://limitless-bastion-8247.herokuapp.com)
 
