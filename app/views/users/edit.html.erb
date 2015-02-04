@@ -1,5 +1,14 @@
-<div class = "page-header">
-  <h1>Edit User</h1>
-</div>
+      <div class = "page-header">
+        <div class = "pull-right">
+          <%= link_to 'Delete', @user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+        <h1>Edit User</h1>
+      </div>
 
-<%= render 'form' %>
+      <ol class = "breadcrumb">
+        <li><a href = "/users">Users</a></li>
+        <li><%= link_to @user.full_name, user_path(@user) %></li>
+        <li class = "active">Edit</li>
+      </ol>
+
+      <%= render 'form' %>
