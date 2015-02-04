@@ -18,6 +18,10 @@
             <tr>
               <td><%= user.first_name %> <%= user.last_name %></td>
               <td><%= mail_to user.email %></td>
+              <td class = "text-right">
+                <%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
+                <%= link_to 'Delete', user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
             </tr>
           <% end %>
         </tbody>
