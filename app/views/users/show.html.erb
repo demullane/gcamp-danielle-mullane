@@ -11,9 +11,11 @@
         <li class = "active"><%= @user.full_name %></li>
       </ol>
 
-      <div>
-        <p>
-          <strong>First Name: </strong><%= @user.first_name %><br />
-          <strong>Last Name: </strong><%= @user.last_name %><br />
-          <strong>Email: </strong><%= @user.email %>
-        </p>
+      <dl class = "dl-horizontal">
+          <dt><strong>First Name: </strong></dt>
+          <dd><%= @user.first_name %></dd>
+          <dt><strong>Last Name: </strong></dt>
+          <dd><%= @user.last_name %></dd>
+          <dt><strong>Email: </strong></dt>
+          <dd><%= mail_to @user.email %></dd>
+      </dl>
