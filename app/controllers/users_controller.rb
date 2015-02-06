@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = User.all
+    @users = User.all
   end
 
   def new
