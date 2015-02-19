@@ -5,46 +5,43 @@
 
       <%= form_for @user, html: {class: "form-horizontal"} do |f| %>
 
-        <form class = "form-horizontal">
-          <div class= "form-group">
-            <%= f.label :first_name, "First Name", class: "control-label col-md-2" %>
-            <div class = "form-controls col-md-4">
-              <%= f.text_field :first_name, class: "form-control" %>
-            </div>
+        <div class= "form-group">
+          <%= f.label :first_name, "First Name", class: "control-label col-md-2" %>
+          <div class = "form-controls col-md-4">
+            <%= f.text_field :first_name, class: "form-control" %>
           </div>
+        </div>
+        <div class = "form-group">
+          <%= f.label :last_name, "Last Name", class: "control-label col-md-2" %>
+          <div class = "form-controls col-md-4">
+            <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+        </div>
+        <div class = "form-group">
+          <%= f.label :email, "Email", class: "control-label col-md-2" %>
+          <div class = "form-controls col-md-4">
+            <%= f.email_field :email, class: "form-control" %>
+          </div>
+        </div>
+
+        <% if @user.new_record? %>
+
           <div class = "form-group">
-            <%= f.label :last_name, "Last Name", class: "control-label col-md-2" %>
-            <div class = "form-controls col-md-4">
-              <%= f.text_field :last_name, class: "form-control" %>
+            <div class = "col-md-offset-2 col-md-4">
+              <%= f.submit "Create User", class: "btn btn-primary" %>
+              <%= link_to "Cancel", users_path, class: "btn btn-default" %>
             </div>
           </div>
+
+        <% else %>
+
           <div class = "form-group">
-            <%= f.label :email, "Email", class: "control-label col-md-2" %>
-            <div class = "form-controls col-md-4">
-              <%= f.email_field :email, class: "form-control" %>
+            <div class = "col-md-offset-2 col-md-4">
+              <%= f.submit "Update User", class: "btn btn-primary" %>
+              <%= link_to "Cancel", "/users", class: "btn btn-default" %>
             </div>
           </div>
 
-          <% if @user.new_record? %>
-
-            <div class = "form-group">
-              <div class = "col-md-offset-2 col-md-4">
-                <%= f.submit "Create User", class: "btn btn-primary" %>
-                <%= link_to "Cancel", users_path, class: "btn btn-default" %>
-              </div>
-            </div>
-
-          <% else %>
-
-            <div class = "form-group">
-              <div class = "col-md-offset-2 col-md-4">
-                <%= f.submit "Update User", class: "btn btn-primary" %>
-                <%= link_to "Cancel", "/users", class: "btn btn-default" %>
-              </div>
-            </div>
-
-          <% end %>
-
-        </form>
+        <% end %>
 
       <% end %>

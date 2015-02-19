@@ -4,21 +4,17 @@
       </div>
 
       <%= form_for @project, html: {class: "form-horizontal"} do |f| %>
-
-        <form class = "form-horizontal">
-          <div class = "form-group">
-            <%= f.label :name, "Name", class: "control-label col-md-2" %>
-            <div class = "form-controls col-md-4">
-              <%= f.text_field :name, class: "form-control" %>
-            </div>
+        <div class = "form-group">
+          <%= f.label :name, "Name", class: "control-label col-md-2" %>
+          <div class = "form-controls col-md-4">
+            <%= f.text_field :name, class: "form-control" %>
           </div>
-          <div class = "form-group">
-            <div class = "col-md-offset-2 col-md-4">
-              <%= f.submit class: "btn btn-primary" %>
-              <%= link_to "Cancel", projects_path, class: "btn btn-default" %>
-            </div>
+        </div>
+        <div class = "form-group">
+          <div class = "col-md-offset-2 col-md-4">
+            <%= f.submit class: "btn btn-primary" %>
+            <%= link_to "Cancel", projects_path, class: "btn btn-default" %>
           </div>
-
-        </form>
+        </div>
 
       <% end %>
