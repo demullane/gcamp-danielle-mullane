@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User can use the tasks page succesfully (CRUD)' do
+describe 'User can use the users page succesfully (CRUD)' do
 
   before :each do
     User.create(first_name: "Joe", last_name: "Student", email: "joestudent@email.com")
@@ -18,6 +18,7 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
     click_on "Create User"
 
+    expect(page).to have_content("User was successfully created.")
     expect(page).to have_content("Bob Smith")
     expect(page).to have_content("bobsmith@email.com")
     expect(page).to have_content("Edit")

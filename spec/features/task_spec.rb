@@ -45,6 +45,9 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
     click_on "This is a test."
 
+    expect(page).to have_content("This is a test.")
+    expect(page).to have_content("Due On: 2015-07-28")
+
     click_on "Edit"
 
     fill_in "Description", with: "This is an updated task."
@@ -68,7 +71,32 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
   end
 
-  scenario 'User creates a new task without a description' do
+  #scenario 'User deletes a task via task edit page' do
+
+    #click_on "Edit"
+
+    #click_on "Delete"
+
+    #expect(page).to have_content("Task was successfully destroyed.")
+    #expect(page).to_not have_content("This is a test.")
+
+  #end
+
+  #scenario 'User deletes a task via task show page' do
+
+    #click_on "This is a test."
+
+    #expect(page).to have_content("This is a test.")
+    #expect(page).to have_content("Due On: 2015-07-28")
+
+    #click_on "Delete"
+
+    #expect(page).to have_content("Task was successfully destroyed.")
+    #expect(page).to_not have_content("This is a test.")
+
+  #end
+
+  scenario 'User creates a new task with blank description field' do
 
     click_on "New Task"
 
@@ -78,7 +106,7 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
   end
 
-  scenario 'User edits an existing task and saves without a description' do
+  scenario 'User edits an existing task and saves with blank description field' do
 
     click_on "Edit"
 
