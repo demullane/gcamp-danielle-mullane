@@ -73,16 +73,19 @@ describe 'User can use the tasks page succesfully (CRUD)' do
     click_on "New Task"
 
     click_on "Create Task"
+
     expect(page).to have_content("Description can't be blank")
 
   end
 
-  scenario 'User edits a task and saves without a description' do
+  scenario 'User edits an existing task and saves without a description' do
 
     click_on "Edit"
 
     fill_in "Description", with: ""
+
     click_on "Update Task"
+
     expect(page).to have_content("Description can't be blank")
 
   end

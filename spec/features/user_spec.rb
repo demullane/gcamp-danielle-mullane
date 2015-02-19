@@ -22,6 +22,7 @@ describe 'User can use the tasks page succesfully (CRUD)' do
     expect(page).to have_content("bobsmith@email.com")
     expect(page).to have_content("Edit")
     expect(page).to have_content("Delete")
+
   end
 
   scenario 'User updates a user via users index page' do
@@ -30,7 +31,7 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
     fill_in "Email", with: "updated@email.com"
 
-    click_button "Update User"
+    click_on "Update User"
 
     expect(page).to have_content("User was successfully updated.")
     expect(page).to have_content("Joe Student")
@@ -52,7 +53,7 @@ describe 'User can use the tasks page succesfully (CRUD)' do
 
     fill_in "Email", with: "updated@email.com"
 
-    click_button "Update User"
+    click_on "Update User"
 
     expect(page).to have_content("User was successfully updated.")
     expect(page).to have_content("Joe Student")
@@ -97,6 +98,48 @@ describe 'User can use the tasks page succesfully (CRUD)' do
     expect(page).to have_content("User was successfully destroyed.")
     expect(page).to_not have_content("Joe Student")
     expect(page).to_not have_content("joestudent@email.com")
+
+  end
+
+  scenario 'User creates a new user without filling in form fields' do
+
+    click_on "New User"
+
+    click_on "Create User"
+
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
+    expect(page).to have_content("Email can't be blank")
+
+  end
+
+  scenario 'User edits an existing user and saves with blank fields' do
+
+    click_on "Edit"
+
+    fill_in "First Name", with: ""
+    fill_in "Last Name", with: ""
+    fill_in "Email", with: ""
+
+    click_on "Update User"
+
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
+    expect(page).to have_content("Email can't be blank")
+
+  end
+
+  scenario 'User creates a new user with an invalid email address' do
+
+    click_on "New User"
+
+    fill_in "First Name", with: "Bob"
+    fill_in "Last Name", with: "Smith"
+    fill_in "Email", with: "bobsmithemail.com"
+
+    click_on "Create User"
+
+    expect(page).to have_content("New User")
 
   end
 
