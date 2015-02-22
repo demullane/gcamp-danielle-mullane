@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     get '/tasks' => 'tasks#index'
     get '/users' => 'users#index'
     get '/projects' => 'projects#index'
+    get '/signup' => 'users#new'
+    post '/signup' => 'users#create'
+    get '/signin' => 'sessions#new'
+    post '/signin' => 'sessions#create'
+    get '/signout' => 'sessions#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
