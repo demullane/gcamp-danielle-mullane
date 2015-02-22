@@ -1,0 +1,25 @@
+<div class = "row">
+  <div class = "col-md-4 col-md-offset-4">
+    <div class = "well" id = "well-custom">
+
+      <h2 id = "signup-signin-header">Sign into gCamp</h2>
+
+      <%= form_tag '/signin' do %>
+
+        <div class = "form-group">
+          <%= label_tag :email, "Email" %>
+          <%= email_field_tag :email, nil, class: "form-control" %>
+        </div>
+        <div class = "form-group">
+          <%= label_tag :password, "Password" %>
+          <%= password_field_tag :password, nil, class: "form-control" %>
+        </div>
+        <div class = "form-group" id = "signup-signin-button">
+          <%= submit_tag "Sign In", class: "btn btn-primary" %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

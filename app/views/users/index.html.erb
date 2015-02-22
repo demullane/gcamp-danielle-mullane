@@ -1,28 +1,28 @@
-      <div class = "page-header">
-        <div class = "pull-right">
-          <%= link_to 'New User', new_user_path, class: "btn btn-info" %>
-        </div>
-        <h1>Users</h1>
-      </div>
+<div class = "page-header">
+  <div class = "pull-right">
+    <%= link_to 'New User', new_user_path, class: "btn btn-info" %>
+  </div>
+  <h1>Users</h1>
+</div>
 
-      <table class = "table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
+<table class = "table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
 
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= link_to user.full_name, user %></td>
-              <td><%= mail_to user.email %></td>
-              <td class = "text-right">
-                <%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
-                <%= link_to 'Delete', user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.full_name, user %></td>
+        <td><%= mail_to user.email %></td>
+        <td class = "text-right">
+          <%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
+          <%= link_to 'Delete', user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
