@@ -1,4 +1,4 @@
-class SessionController < ActiveRecord::Base
+class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: [:user][:email])

@@ -17,9 +17,14 @@
           <a class = "navbar-brand" href = "/">gCamp</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/signup">Sign Up</a></li>
-          <li><a href="/signin">Sign In</a></li>
-          <!--<li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
+          <% if current_user %>
+            <li><%= link_to current_user.full_name, user_path(current_user) %></li>
+            <li><%= link_to "Sign Out", signout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", signup_path %></li>
+            <li><%= link_to "Sign In", signin_path %></li>
+            <!--<li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
+          <% end %>
         </ul>
       </div>
     </div>

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get '/projects' => 'projects#index'
     get '/signup' => 'users#new'
     post '/signup' => 'users#create'
-    get '/signin' => 'sessions#new'
+    get '/signin' => 'users#new'
     post '/signin' => 'sessions#create'
     get '/signout' => 'sessions#destroy'
 
