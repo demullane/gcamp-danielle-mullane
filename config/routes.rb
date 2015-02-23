@@ -11,10 +11,13 @@ Rails.application.routes.draw do
     get '/tasks' => 'tasks#index'
     get '/users' => 'users#index'
     get '/projects' => 'projects#index'
-    get '/signup' => 'users#new'
-    post '/signup' => 'users#create'
+
+    get '/signup' => 'registrations#new'
+    post '/signup' => 'registrations#create'
+
     get '/signin' => 'sessions#new'
     post '/signin' => 'sessions#create'
+
     get '/signout' => 'sessions#destroy'
 
 end

@@ -1,9 +1,10 @@
-<% if request.original_fullpath == '/signup' %>
+<div class = "page-header">
+  <h1>New User</h1>
+</div>
 
-  <%= render 'signup_form' %>
+<ol class = "breadcrumb">
+  <li><a href = "/users">Users</a></li>
+  <li class = "active">New User</li>
+</ol>
 
-<% else %>
-
-  <%= render 'admin_user_form' %>
-
-<% end %>
+<%= render 'form' %>

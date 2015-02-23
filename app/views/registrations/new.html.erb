@@ -6,7 +6,7 @@
 
       <%= render partial: 'error', locals: { object: @user } %>
 
-      <%= form_for @user do |f| %>
+      <%= form_for @user, url: signup_path do |f| %>
 
         <div class= "form-group">
           <%= f.label :first_name, "First Name" %>
@@ -31,7 +31,7 @@
 
         <div class = "form-group", id = "signup-signin-button">
           <%= f.submit "Sign Up", class: "btn btn-primary" %>
-          <%= link_to "Cancel", users_path, class: "btn btn-default" %>
+          <%= link_to "Cancel", root_path, class: "btn btn-default" %>
         </div>
 
       <% end %>
