@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :find_params, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate
 
   def index
     @projects = Project.all
@@ -47,6 +48,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name)
+  end
+
+  def authenticate
+    redirect_to '/signin' unless current_user
   end
 
 
