@@ -1,23 +1,10 @@
-<!--<%= render partial: 'shared/error', locals: { object: @user } %>-->
-
 <div class = "row">
   <div class = "col-md-4 col-md-offset-4">
-    <div class = "well">
+    <div class = "well" id = "signup-well-custom">
 
-      <% if request.original_fullpath == "/signup" %>
-        <h2>Sign Up for gCamp!</h2>
-      <% else %>
-        <h2>Sign into gCamp</h2>
-      <% end %>
+      <h2 id = "signup-signin-header">Sign Up for gCamp!</h2>
 
-      <% if @user.errors.any? %>
-        <div id = "red-error-text">
-          <% @user.errors.full_messages.each do |message| %>
-              <%= message %><br />
-          <% end %>
-        </div>
-        <br />
-      <% end %>
+      <%= render partial: 'error', locals: { object: @user } %>
 
       <%= form_for @user do |f| %>
 
@@ -42,21 +29,10 @@
           <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
 
-        <% if request.original_fullpath == "/signup" %>
-
-          <div class = "form-group">
-            <%= f.submit "Sign Up", class: "btn btn-primary" %>
-            <%= link_to "Cancel", users_path, class: "btn btn-default" %>
-          </div>
-
-        <% else %>
-
-          <div class = "form-group">
-            <%= f.submit "Sign In", class: "btn btn-primary" %>
-            <%= link_to "Cancel", "/users", class: "btn btn-default" %>
-          </div>
-
-        <% end %>
+        <div class = "form-group", id = "signup-signin-button">
+          <%= f.submit "Sign Up", class: "btn btn-primary" %>
+          <%= link_to "Cancel", users_path, class: "btn btn-default" %>
+        </div>
 
       <% end %>
 

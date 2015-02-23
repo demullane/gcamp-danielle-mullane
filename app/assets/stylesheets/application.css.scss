@@ -33,6 +33,18 @@ footer {
   color: red;
 }
 
+#signin-well-custom {
+  min-width: 360px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#signup-well-custom {
+  min-width: 360px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 #signup-signin-button {
   margin-bottom: 0px;
 }
@@ -41,8 +53,6 @@ footer {
   margin-top: 0px;
 }
 
-
 #well-custom {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  min-width: 360px;
 }

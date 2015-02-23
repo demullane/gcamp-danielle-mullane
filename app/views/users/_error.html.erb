@@ -1,0 +1,8 @@
+<% if @user.errors.any? %>
+  <div id = "red-error-text">
+    <% @user.errors.full_messages.each do |message| %>
+        <%= message %><br />
+    <% end %>
+  </div>
+  <br />
+<% end %>
