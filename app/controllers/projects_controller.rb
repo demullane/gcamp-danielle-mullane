@@ -28,10 +28,18 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    old_attrs = @project.attributes
     if @project.update(project_params)
       redirect_to @project, notice: "Project was successfully updated."
     else
-      render :edit
+      new_attrs = {}
+      @project.attributes.each do |attr, val|
+        if @project.errors.added? attr, :blank
+          new_attrs[attr] = old_attrs[attr]
+        end
+      end
+    @project.assign_attributes(new_attrs)
+    render :edit
     end
   end
 

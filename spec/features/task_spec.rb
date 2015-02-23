@@ -3,7 +3,14 @@ require 'rails_helper'
 describe 'User can use the tasks page succesfully (CRUD)' do
 
   before :each do
+    User.create(first_name: "Joe", last_name: "Student", email: "joestudent@email.com", password: "password")
     Task.create(description: "This is a test.", task_due_date: "2015-07-28")
+
+    visit '/signin'
+    fill_in "Email", with: "joestudent@email.com"
+    fill_in "Password", with: "password"
+    click_button "Sign In"
+
     visit '/tasks'
   end
 

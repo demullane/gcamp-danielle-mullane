@@ -42,11 +42,20 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    old_attrs = @task.attributes
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
+        # replace blank attributes with old params
+        new_attrs = {}
+        @task.attributes.each do |attr, val|
+          if @task.errors.added? attr, :blank
+            new_attrs[attr] = old_attrs[attr]
+          end
+        end
+        @task.assign_attributes(new_attrs)
         format.html { render :edit }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end

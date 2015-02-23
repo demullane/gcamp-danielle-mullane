@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User can use the users page succesfully (CRUD)' do
 
   before :each do
-    User.create(first_name: "Joe", last_name: "Student", email: "joestudent@email.com")
+    User.create(first_name: "Joe", last_name: "Student", email: "joestudent@email.com", password: "password")
     visit '/users'
   end
 
@@ -15,7 +15,8 @@ describe 'User can use the users page succesfully (CRUD)' do
     fill_in "First Name", with: "Bob"
     fill_in "Last Name", with: "Smith"
     fill_in "Email", with: "bobsmith@email.com"
-
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "password"
     click_on "Create User"
 
     expect(page).to have_content("User was successfully created.")
@@ -31,6 +32,8 @@ describe 'User can use the users page succesfully (CRUD)' do
     click_on "Edit"
 
     fill_in "Email", with: "updated@email.com"
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "password"
 
     click_on "Update User"
 
@@ -53,6 +56,8 @@ describe 'User can use the users page succesfully (CRUD)' do
     click_on "Edit"
 
     fill_in "Email", with: "updated@email.com"
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "password"
 
     click_on "Update User"
 
@@ -111,6 +116,24 @@ describe 'User can use the users page succesfully (CRUD)' do
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
     expect(page).to have_content("Email can't be blank")
+    expect(page).to have_content("Password can't be blank")
+
+  end
+
+  scenario 'User creates a new user with mismatching password and password confirmation fields' do
+
+    click_on "New User"
+
+    click_on "Create User"
+
+    fill_in "First Name", with: "Bob"
+    fill_in "Last Name", with: "Smith"
+    fill_in "Email", with: "bobsmith@email.com"
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "pass"
+    click_on "Create User"
+
+    expect(page).to have_content("Password confirmation doesn't match Password")
 
   end
 
@@ -130,6 +153,20 @@ describe 'User can use the users page succesfully (CRUD)' do
 
   end
 
+  scenario 'User edits and existing user and saves with mismatching password and password confirmation fields' do
+
+    click_on "Joe Student"
+
+    click_on "Edit"
+
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "pass"
+    click_on "Update User"
+
+    expect(page).to have_content("Password confirmation doesn't match Password")
+
+  end
+
   scenario 'User creates a new user with an invalid email address' do
 
     click_on "New User"
@@ -137,6 +174,8 @@ describe 'User can use the users page succesfully (CRUD)' do
     fill_in "First Name", with: "Bob"
     fill_in "Last Name", with: "Smith"
     fill_in "Email", with: "bobsmithemail.com"
+    fill_in "Password", with: "password"
+    fill_in "Password Confirmation", with: "password"
 
     click_on "Create User"
 

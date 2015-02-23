@@ -27,9 +27,19 @@ class UsersController < ApplicationController
   end
 
   def update
+    old_attrs = @user.attributes
+
     if @user.update(user_params)
       redirect_to users_path, notice: "User was successfully updated."
     else
+      # replace blank attributes with old params
+      new_attrs = {}
+      @user.attributes.each do |attr, val|
+      if @user.errors.added? attr, :blank
+        new_attrs[attr] = old_attrs[attr]
+      end
+    end
+      @user.assign_attributes(new_attrs)
       render :edit
     end
   end
