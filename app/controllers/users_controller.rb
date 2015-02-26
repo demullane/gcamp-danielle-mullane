@@ -35,10 +35,10 @@ class UsersController < ApplicationController
       # replace blank attributes with old params
       new_attrs = {}
       @user.attributes.each do |attr, val|
-      if @user.errors.added? attr, :blank
-        new_attrs[attr] = old_attrs[attr]
+        if @user.errors.added? attr, :blank
+          new_attrs[attr] = old_attrs[attr]
+        end
       end
-    end
       @user.assign_attributes(new_attrs)
       render :edit
     end
