@@ -85,7 +85,9 @@ class TasksController < ApplicationController
 
     def authenticate
       redirect_to '/signin' unless current_user
-      flash[:notice] = "You must sign in first."
+      if !current_user
+        flash[:notice] = "You must signin first."
+      end
     end
 
 end

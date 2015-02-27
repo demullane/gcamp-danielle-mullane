@@ -2,22 +2,21 @@ require 'rails_helper'
 
 describe 'User cannot view unathorized pages when not signed in' do
 
-  before :each do
-    visit '/'
-  end
-
   scenario 'User who is not signed in cannot see Tasks pages' do
 
-    click_on "Tasks"
+    visit "/tasks"
 
+    expect(page).to have_content("You must signin first.")
     expect(page).to have_content("Sign into gCamp!")
   end
 
   scenario 'User who is not signed in cannot see Projects pages' do
 
-    click_on "Projects"
+    visit "/projects"
 
     expect(page).to have_content("Sign into gCamp!")
+    expect(page).to have_content("You must signin first.")
+
   end
 
 end
