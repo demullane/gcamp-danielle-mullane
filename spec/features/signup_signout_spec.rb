@@ -32,4 +32,14 @@ describe 'User can signup and is added to user table' do
 
   end
 
+  scenario 'User can signout successfully' do
+
+    click_on "Sign Out"
+
+    expect(page).to have_content("You have successfully logged out.")
+    expect(page).to_not have_content("Projects")
+    expect(page).to_not have_content("Users")
+
+  end
+
 end
