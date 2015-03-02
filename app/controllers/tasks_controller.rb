@@ -38,7 +38,7 @@ class TasksController < ApplicationController
     old_attrs = @task.attributes
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to project_task_path(@project,@task), notice: 'Task was successfully updated.' }
+        format.html { redirect_to project_tasks_path(@project), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         # replace blank attributes with old params
