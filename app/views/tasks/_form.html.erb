@@ -3,7 +3,7 @@
       <div class = "col-md-12">
       </div>
 
-      <%= form_for @task, html: {class: "form-horizontal"} do |f| %>
+      <%= form_for [@project, @task], html: {class: "form-horizontal"} do |f| %>
           <div class= "form-group">
             <%= f.label :description, class: "control-label col-md-2" %>
             <div class = "form-controls col-md-4">
