@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     @task.project_id = params[:project_id]
 
     if @task.save
-      redirect_to project_membes_path(@project), notice: 'Task was successfully created.'
+      redirect_to project_tasks_path(@project), notice: 'Task was successfully created.'
     else
       render :new
     end

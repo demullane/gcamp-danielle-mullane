@@ -14,4 +14,12 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def membership_count
+    if memberships.count == 1
+      "#{memberships.count} Member"
+    else
+      "#{memberships.count} Members"
+    end
+  end
+
 end
