@@ -6,7 +6,7 @@ describe 'User cannot view unathorized pages when not signed in' do
 
     visit "/tasks"
 
-    expect(page).to have_content("You must signin first.")
+    expect(page).to have_content("You must sign in first.")
     expect(page).to have_content("Sign into gCamp!")
   end
 
@@ -15,7 +15,7 @@ describe 'User cannot view unathorized pages when not signed in' do
     visit "/projects"
 
     expect(page).to have_content("Sign into gCamp!")
-    expect(page).to have_content("You must signin first.")
+    expect(page).to have_content("You must sign in first.")
 
   end
 
