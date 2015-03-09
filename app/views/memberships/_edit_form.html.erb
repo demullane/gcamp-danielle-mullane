@@ -5,6 +5,7 @@
   <tr class = "membership-form">
     <td class = "form-inline"><%= link_to User.find(@membership.user_id).full_name, user_path(@membership.user_id) %>&nbsp;&nbsp;</td>
     <td class = "form-inline"><%= f.select :role, [["Owner"],["Member"]], {include_blank: false}, {class: "form-control"} %>&nbsp;&nbsp;</td>
-    <td class = "form-inline"><%= f.submit "Update Member", class: "btn btn-primary" %></td>
+    <td class = "form-inline"><%= f.submit "Update Member", class: "btn btn-primary" %>&nbsp;&nbsp;</td>
+    <td class = "form-inline"><%= link_to '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>'.html_safe, project_membership_path(@project,@membership), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

@@ -38,6 +38,11 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership.destroy
+    redirect_to project_memberships_path(@project), notice: 'Member was successfully removed.'
+  end
+
   private
 
     def set_project
