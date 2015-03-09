@@ -11,3 +11,12 @@
 <%= render 'error' %>
 
 <%= render 'form' %>
+
+<table>
+  <tbody>
+    <% @project.memberships.each do |m| %>
+      <% @membership = Membership.find(m.id) %>
+      <%= render 'edit_form' %>
+    <% end %>
+  </tbody>
+</table>

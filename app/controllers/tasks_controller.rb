@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
 
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_project
+
 
   def index
     @tasks = Task.all
@@ -68,7 +69,7 @@ class TasksController < ApplicationController
     def authenticate
       redirect_to '/signin' unless current_user
       if !current_user
-        flash[:notice] = "You must signin first."
+        flash[:notice] = "You must sign in first."
       end
     end
 
