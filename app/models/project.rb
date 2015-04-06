@@ -31,7 +31,7 @@ class Project < ActiveRecord::Base
   end
 
   def membership_count_lowercase
-    if tasks.count == 1
+    if memberships.count == 1
       "#{memberships.count} membership"
     else
       "#{memberships.count} memberships"
