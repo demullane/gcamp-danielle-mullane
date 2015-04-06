@@ -22,4 +22,20 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def task_count_lowercase
+    if tasks.count == 1
+      "#{tasks.count} task"
+    else
+      "#{tasks.count} tasks"
+    end
+  end
+
+  def membership_count_lowercase
+    if tasks.count == 1
+      "#{memberships.count} membership"
+    else
+      "#{memberships.count} memberships"
+    end
+  end
+
 end

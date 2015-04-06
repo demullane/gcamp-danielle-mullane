@@ -17,3 +17,9 @@
   <dt></dt>
   <dd><h4><%= link_to @project.membership_count, project_memberships_path(@project) %></h4></dd>
 </dl>
+
+<div class = "well">
+  <h4>Delete Project</h4>
+  <p>Deleting this project will also delete <%= @project.membership_count_lowercase %>, <%= @project.task_count_lowercase %> and associated comments.</p>
+  <%= link_to 'Delete', @project, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
