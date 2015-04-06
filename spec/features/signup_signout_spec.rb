@@ -18,7 +18,7 @@ describe 'User can signup and is added to user table' do
   scenario 'User can signup' do
 
     expect(page).to have_content("Danielle Test")
-    expect(page).to have_content("Your life, organized.")
+    expect(page).to have_content("New Project")
     expect(page).to have_content("You have successfully signed up.")
 
   end
