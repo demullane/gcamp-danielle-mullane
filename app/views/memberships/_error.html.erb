@@ -1,9 +1,22 @@
-<% if @membership.errors.any? %>
+<% @count = 0 %>
+<% flash.each do |type, message| %>
+  <% if type == "membership" %>
+    <% @last_owner_error = true %>
+    <% @count = 1 %>
+  <% end %>
+<% end %>
+
+<% if @membership.errors.any? || @last_owner_error %>
   <div class = "alert alert-danger" id="error-explanation">
-    <h4><%= pluralize(@membership.errors.count, "error") %> prohibited this task from being saved:</h4>
+    <h4><%= pluralize((@membership.errors.count + @count), "error") %> prohibited this task from being saved:</h4>
     <ul>
       <% @membership.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      <% flash.each do |type, message| %>
+        <% if type == "membership" %>
           <li><%= message %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

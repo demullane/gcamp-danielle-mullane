@@ -1,9 +1,9 @@
-class MembershipsController < ApplicationController
+ class MembershipsController < ApplicationController
 
   before_action :authenticate
   before_action :set_project
   before_action :set_membership, only: [:update, :destroy]
-
+  before_action :check_last_owner, only: [:update]
 
   def index
     @membership = Membership.new
@@ -22,18 +22,9 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    old_attrs = @membership.attributes
     if @membership.update(membership_params)
       redirect_to project_memberships_path(@project), notice: "#{User.find(@membership.user_id).full_name} was successfully updated."
     else
-      # replace blank attributes with old params
-      new_attrs = {}
-      @membership.attributes.each do |attr, val|
-        if @membership.errors.added? attr, :blank
-          new_attrs[attr] = old_attrs[attr]
-        end
-      end
-      @membership.assign_attributes(new_attrs)
       render :index
     end
   end
@@ -64,4 +55,10 @@ class MembershipsController < ApplicationController
       end
     end
 
+    def check_last_owner
+      if @membership.role == "Owner" && @project.memberships.find_all{|membership| membership.role == "Owner"}.count == 1
+        flash[:membership] = "Projects must have at least one owner."
+        redirect_to project_memberships_path(@project)
+      end
+    end
 end
