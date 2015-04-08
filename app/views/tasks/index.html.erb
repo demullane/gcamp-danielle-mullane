@@ -24,13 +24,12 @@
   <tbody>
     <% @project.tasks.each do |task| %>
       <tr>
-        <td><%= task.description %></td>
+        <td><%= link_to task.description, project_task_path(@project, task) %></td>
         <td><%= task.task_completed %></td>
         <td><%= task.task_due_date %></td>
         <td class = "text-right">
-          <%= link_to "Show", project_task_path(@project, task), class: "btn btn-success" %>
           <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info" %>
-          <%= link_to "Delete", project_task_path(@project,task), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %> 
+          <%= link_to '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>'.html_safe, project_task_path(@project,task), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
