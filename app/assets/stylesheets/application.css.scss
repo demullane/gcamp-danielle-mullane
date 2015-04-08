@@ -65,3 +65,11 @@ tr.membership-form > td {
   color: black;
   width: 40%;
 }
+
+textarea.form-control {
+  max-width: 100%;
+}
+
+#username_comment {
+  text-decoration: underline;
+}
