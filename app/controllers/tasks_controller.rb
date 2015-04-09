@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = Comment.all.each do |comment|
+    @comments = @task.comments.each do |comment|
       comment.user_exist_check
     end
   end

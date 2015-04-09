@@ -20,8 +20,10 @@
         <td><%= link_to project.name, project %></td>
         <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
         <td class = "text-right">
-          <%= link_to 'Edit', edit_project_path(project), class: "btn btn-info" %>
-          <%= link_to 'Delete', project, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if project.users.map{|user| (user.id == current_user.id)} && (project.memberships.find{ |hash| (hash["project_id"] == project.id) && (hash["user_id"] == current_user.id) && (hash["role"] = "Owner")}) %>
+            <%= link_to 'Edit', edit_project_path(project), class: "btn btn-info" %>
+            <%= link_to 'Delete', project, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
         </td>
       </tr>
     <% end %>
