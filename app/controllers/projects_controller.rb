@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       @membership = Membership.create(project_id: @project.id, user_id: current_user.id, role: "Owner")
-      redirect_to @project, notice: "Project was successfully created."
+      redirect_to project_tasks_path(@project), notice: "Project was successfully created."
     else
       render :new
     end
