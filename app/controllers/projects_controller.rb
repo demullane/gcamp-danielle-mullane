@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
 
-  before_action :find_params, only: [:show, :edit, :update, :destroy]
+  before_action :find_params, only: [:show, :edit, :update, :destroy, :role_authentication]
   before_action :authenticate
+  before_action :role_authentication, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -26,27 +27,38 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    unless @role_authentication
+      redirect_to @project, alert: "You do not have access."
+    end
   end
 
   def update
-    old_attrs = @project.attributes
-    if @project.update(project_params)
-      redirect_to @project, notice: "Project was successfully updated."
-    else
-      new_attrs = {}
-      @project.attributes.each do |attr, val|
-        if @project.errors.added? attr, :blank
-          new_attrs[attr] = old_attrs[attr]
+    if @role_authentication
+      old_attrs = @project.attributes
+      if @project.update(project_params)
+        redirect_to @project, notice: "Project was successfully updated."
+      else
+        new_attrs = {}
+        @project.attributes.each do |attr, val|
+          if @project.errors.added? attr, :blank
+            new_attrs[attr] = old_attrs[attr]
+          end
         end
+        @project.assign_attributes(new_attrs)
+        render :edit
       end
-    @project.assign_attributes(new_attrs)
-    render :edit
+    else
+      redirect_to @project, alert: "You do not have access."
     end
   end
 
   def destroy
-    @project.destroy
-    redirect_to projects_path, notice: "Project was successfully destroyed."
+    if @role_authentication
+      @project.destroy
+      redirect_to projects_path, notice: "Project was successfully destroyed."
+    else
+      redirect_to projects_path, alert: "You do not have access."
+    end
   end
 
   private
@@ -62,9 +74,17 @@ class ProjectsController < ApplicationController
   def authenticate
     redirect_to '/signin' unless current_user
     if !current_user
-      flash[:notice] = "You must sign in first."
+      flash[:alert] = "You must sign in first."
     end
   end
 
+  def role_authentication
+    @project = Project.find(params[:id])
+    if @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{ |hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] = "Owner")})
+      @role_authentication = true
+    else
+      @role_authentication = false
+    end
+  end
 
 end
