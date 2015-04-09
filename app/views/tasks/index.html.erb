@@ -24,7 +24,10 @@
   <tbody>
     <% @project.tasks.each do |task| %>
       <tr>
-        <td><%= link_to task.description, project_task_path(@project, task) %></td>
+        <td>
+          <%= link_to task.description, project_task_path(@project, task) %>
+          &nbsp;&nbsp;<span class = "badge"><%= task.comments.count %></span>
+        </td>
         <td><%= task.task_completed %></td>
         <td><%= task.task_due_date %></td>
         <td class = "text-right">
