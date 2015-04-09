@@ -29,7 +29,7 @@
         <td><%= task.task_due_date %></td>
         <td class = "text-right">
           <%= link_to "Edit", edit_project_task_path(@project, task), class: "btn btn-info" %>
-          <%= link_to '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>'.html_safe, project_task_path(@project,task), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to '<i class="glyphicon glyphicon-remove" aria-hidden="true"></i>'.html_safe, project_task_path(@project,task), method: :delete, data: { confirm: 'Are you sure?' }, id: "task_delete" %>
         </td>
       </tr>
     <% end %>
