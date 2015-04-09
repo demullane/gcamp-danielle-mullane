@@ -5,6 +5,7 @@ class AboutController < ApplicationController
     counter_hash["user"] = User.all.count
     counter_hash["task"] = Task.all.count
     counter_hash["membership"] = Membership.all.count
+    counter_hash["comment"] = Comment.all.count
 
     counter_hash.each do |key, total|
       if total == 1
@@ -25,5 +26,7 @@ class AboutController < ApplicationController
     @user_count = counter_hash.values[1]
     @task_count = counter_hash.values[2]
     @membership_count = counter_hash.values[3]
+    @comment_count = counter_hash.values[4]
+
   end
 end
