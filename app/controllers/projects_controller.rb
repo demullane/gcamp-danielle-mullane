@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_action :find_params, only: [:show, :edit, :update, :destroy, :role_authentication]
   before_action :authenticate
-  before_action :role_authentication, only: [:edit, :update, :destroy]
+  before_action :role_authentication, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = Project.all
