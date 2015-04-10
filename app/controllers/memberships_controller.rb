@@ -61,4 +61,5 @@
         redirect_to project_memberships_path(@project)
       end
     end
+    
 end

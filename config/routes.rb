@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get '/tasks' => 'tasks#index'
     get '/users' => 'users#index'
     get '/projects' => 'projects#index'
+    get '/projects/:id/noaccess' => 'projects#membership_redirect_for_non_member'
 
     get '/signup' => 'registrations#new'
     post '/signup' => 'registrations#create'

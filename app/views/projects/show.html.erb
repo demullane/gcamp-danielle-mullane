@@ -14,7 +14,11 @@
   <dt></dt>
   <dd><h4><%= link_to @project.task_count, project_tasks_path(@project) %></h4></dd>
   <dt></dt>
-  <dd><h4><%= link_to @project.membership_count, project_memberships_path(@project) %></h4></dd>
+  <% if @project.users.include?(current_user) %>
+    <dd><h4><%= link_to @project.membership_count, project_memberships_path(@project) %></h4></dd>
+  <% else %>
+    <dd><h4><%= link_to @project.membership_count, :controller => "projects", :action => "membership_redirect_for_non_member" %>
+  <% end %>
 </dl>
 
 <% if @role_authentication %>

@@ -61,6 +61,11 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def membership_redirect_for_non_member
+    @project = Project.find(params[:id])
+    redirect_to @project, alert: "You do not have access."
+  end
+
   private
 
   def find_params
@@ -80,11 +85,7 @@ class ProjectsController < ApplicationController
 
   def role_authentication
     @project = Project.find(params[:id])
-    if @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{ |hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] = "Owner")})
-      @role_authentication = true
-    else
-      @role_authentication = false
-    end
+    @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{ |hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] = "Owner")})
   end
 
 end
