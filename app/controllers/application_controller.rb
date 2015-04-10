@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  class EditUserAuthentication < StandardError; end
+
+  rescue_from EditUserAuthentication, :with => :edit_user_authentication
+
+  private
+  
+  def edit_user_authentication
+    render file: "public/edit_user_authentication.html", :layout => false, status: 404
+  end
 end

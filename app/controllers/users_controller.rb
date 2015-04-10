@@ -24,6 +24,9 @@ class UsersController < ApplicationController
   end
 
   def edit
+    puts "HELLO"*6
+    puts current_user.id == @user.id
+    raise EditUserAuthentication unless (current_user.id == @user.id)
   end
 
   def update
@@ -45,8 +48,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_path, notice: "User was successfully destroyed."
+    if @user.id == current_user.id
+      @user.destroy
+      session.clear
+      redirect_to root_path, notice: "You have successfully deleted your account."
+    else
+      redirect_to users_path, notice: "User was successfully destroyed."
+    end
   end
 
   private

@@ -1,7 +1,9 @@
       <div class = "page-header">
         <div class = "pull-right">
-          <%= link_to "Edit", edit_user_path(@user), class: "btn btn-info" %>
-          <%= link_to "Delete", @user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if @user.id == current_user.id %>
+            <%= link_to "Edit", edit_user_path(@user), class: "btn btn-info" %>
+            <%= link_to "Delete", @user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
         </div>
         <h1><%= @user.first_name %> <%= @user.last_name %></h1>
       </div>
