@@ -15,17 +15,22 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= link_to project.name, project %></td>
-        <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
-        <td class = "text-right">
-          <% if project.users.map{|user| (user.id == current_user.id)} && (project.memberships.find{ |hash| (hash["project_id"] == project.id) && (hash["user_id"] == current_user.id) && (hash["role"] = "Owner")}) %>
-            <%= link_to 'Edit', edit_project_path(project), class: "btn btn-info" %>
-            <%= link_to 'Delete', project, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </td>
-      </tr>
+    <% puts "HELLO"*10 %>
+    <% puts @filtered_projects %>
+    <% @filtered_projects.each do |row| %>
+      <% row.each do |project_id, owner_boolean| %>
+        <% project = Project.find(project_id.to_s.to_i) %>
+        <tr>
+          <td><%= link_to project.name, project %></td>
+          <td><%= link_to project.tasks.count, project_tasks_path(project) %></td>
+          <td class = "text-right">
+            <% if owner_boolean %>
+              <%= link_to 'Edit', edit_project_path(project), class: "btn btn-info" %>
+              <%= link_to 'Delete', project, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

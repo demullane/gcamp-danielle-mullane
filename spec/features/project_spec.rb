@@ -5,6 +5,7 @@ describe 'User can use the projects page succesfully (CRUD)' do
   before :each do
     User.create(first_name: "Joe", last_name: "Student", email: "joestudent@email.com", password: "password")
     Project.create(name: "Test Project")
+    Membership.create(project_id: Project.last.id, user_id: User.last.id, role: "Owner")
 
     visit '/signin'
     fill_in "Email", with: "joestudent@email.com"
@@ -25,9 +26,7 @@ describe 'User can use the projects page succesfully (CRUD)' do
 
     expect(page).to have_content("Project was successfully created.")
     expect(page).to have_content("Test Project #2")
-    expect(page).to have_content("Edit")
-    expect(page).to have_content("Delete")
-
+    expect(page).to have_content("New Task")
   end
 
   scenario 'User updates a project via projects index page' do

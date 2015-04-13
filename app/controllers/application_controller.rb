@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   rescue_from EditUserAuthentication, :with => :edit_user_authentication
 
   private
-  
+
   def edit_user_authentication
     render file: "public/edit_user_authentication.html", :layout => false, status: 404
   end

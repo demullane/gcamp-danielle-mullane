@@ -24,8 +24,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    puts "HELLO"*6
-    puts current_user.id == @user.id
     raise EditUserAuthentication unless (current_user.id == @user.id)
   end
 
