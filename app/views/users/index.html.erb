@@ -20,11 +20,10 @@
         <td><%= link_to user.full_name, user %></td>
         <td><%= mail_to user.email %></td>
           <td class = "text-right">
-            <!-- <#% if current_user %> -->
-              <% if current_user && current_user.id == current_user.id %>
-                <%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
-                <%= link_to 'Delete', user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-              <% end %>
+            <% if current_user.id == user.id %>
+              <%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
+              <%= link_to 'Delete', user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
           </td>
       </tr>
     <% end %>

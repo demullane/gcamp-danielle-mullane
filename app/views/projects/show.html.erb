@@ -1,7 +1,9 @@
 <div class = "page-header">
-  <div class = "pull-right">
-    <%= link_to "Edit", edit_project_path(@project), class: "btn btn-info" %>
-  </div>
+  <% if @role_authentication %>
+    <div class = "pull-right">
+      <%= link_to "Edit", edit_project_path(@project), class: "btn btn-info" %>
+    </div>
+  <% end %>
   <h1><%= @project.name %></h1>
 </div>
 

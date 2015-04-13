@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate
   before_action :find_params, only: [:show, :edit, :update, :destroy]
+  before_action :current_user_auth, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -24,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    raise EditUserAuthentication unless (current_user.id == @user.id)
   end
 
   def update
@@ -62,6 +63,17 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+
+  def authenticate
+    redirect_to '/signin' unless current_user
+    if !current_user
+      flash[:alert] = "You must sign in first."
+    end
+  end
+
+  def current_user_auth
+    raise CurrentUserAuthentication unless (current_user.id == @user.id)
   end
 
 end

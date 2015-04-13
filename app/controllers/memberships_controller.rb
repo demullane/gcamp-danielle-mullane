@@ -4,6 +4,7 @@
   before_action :set_project
   before_action :set_membership, only: [:update, :destroy]
   before_action :check_last_owner, only: [:update]
+  before_action :member_authentication, only: [:index, :create, :update, :destroy]
 
   def index
     @membership = Membership.new
@@ -61,5 +62,11 @@
         redirect_to project_memberships_path(@project)
       end
     end
-    
+
+    def member_authentication
+      unless @project.users.include?(current_user)
+        redirect_to projects_path, alert: "You do not have access."
+      end
+    end
+
 end
