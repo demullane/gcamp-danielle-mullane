@@ -1,14 +1,20 @@
 class UsersController < ApplicationController
 
   before_action :authenticate
-  before_action :find_params, only: [:show, :edit, :update, :destroy, :remove_action_authentication]
+  before_action :find_params, only: [:show, :edit, :update, :destroy, :remove_action_authentication, :email_access]
   before_action :remove_action_authentication, only: [:show, :edit, :update, :destroy]
   before_action :current_user_auth, only: [:edit, :update, :destroy]
+  before_action :email_access, only: [:show]
+  before_action :update_admin_authentication, only: [:update]
 
   def index
     @users = []
     users_record = []
     User.all.each do |user|
+      if (user.id == current_user.id)
+        @users << {"#{user.id}":true}
+        users_record << user
+      end
       current_user.projects.each do |project|
         if (project.users.include?(user)) && !(users_record.include?(user))
           @users << {"#{user.id}":true}
@@ -36,12 +42,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @access_to_email = false
-    current_user.projects.each do |project|
-      if (project.users.include?(@user))
-        @access_to_email = true
-      end
-    end
   end
 
   def edit
@@ -49,9 +49,10 @@ class UsersController < ApplicationController
 
   def update
     old_attrs = @user.attributes
-
-    if @user.update(user_params)
+    if ((@allowed == "yes") || (@allowed == "no_tamper")) && @user.update(user_params)
       redirect_to users_path, notice: "User was successfully updated."
+    elsif (@allowed == "no")
+      redirect_to users_path, notice: "You do not have access to make a user an admin."
     else
       # replace blank attributes with old params
       new_attrs = {}
@@ -82,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :admin)
   end
 
   def authenticate
@@ -98,6 +99,29 @@ class UsersController < ApplicationController
 
   def current_user_auth
     raise CurrentUserAuthentication unless @current_user_authentication
+  end
+
+  def email_access
+    @access_to_email = false
+    if current_user == @user
+      @access_to_email = true
+    else
+      current_user.projects.each do |project|
+        if (project.users.include?(@user))
+          @access_to_email = true
+        end
+      end
+    end
+  end
+
+  def update_admin_authentication
+    if user_params["admin"] && current_user.admin
+      @allowed = "yes"
+    elsif !user_params["admin"]
+      @allowed = "no_tamper"
+    else
+      @allowed = "no"
+    end
   end
 
 end

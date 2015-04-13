@@ -12,9 +12,9 @@ class ProjectsController < ApplicationController
     @projects.each do |project|
       if project.users.include?(current_user)
         if (project.memberships.find{ |hash| (hash["project_id"] == project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")})
-          @filtered_projects << {"#{project.id}":true}
+          @filtered_projects << {"#{project.id}": true}
         else
-          @filtered_projects << {"#{project.id}":false}
+          @filtered_projects << {"#{project.id}": false}
         end
       end
     end
