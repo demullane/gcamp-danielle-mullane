@@ -5,7 +5,7 @@
   before_action :set_membership, only: [:update, :destroy]
   before_action :check_last_owner, only: [:update]
   before_action :remove_action_authentication
-  before_action :role_authentication, only: [:update, :destroy]
+  before_action :role_authentication, only: [:update]
   before_action :member_authentication
 
   def index
@@ -33,8 +33,15 @@
   end
 
   def destroy
-    @membership.destroy
-    redirect_to project_memberships_path(@project), notice: 'Member was successfully removed.'
+    if (@role_authentication && (@membership.user_id == current_user.id)) || (@membership.user_id == current_user.id)
+      @membership.destroy
+      redirect_to projects_path, notice: "#{@membership.user.first_name} #{@membership.user.last_name} was successfully removed."
+    elsif @role_authentication
+      @membership.destroy
+      redirect_to project_memberships_path(@project), notice: "#{@membership.user.first_name} #{@membership.user.last_name} was successfully removed."
+    else
+      redirect_to projects_path, alert: "You do not have access."
+    end
   end
 
   private
