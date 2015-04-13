@@ -6,7 +6,19 @@ class UsersController < ApplicationController
   before_action :current_user_auth, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = []
+    users_record = []
+    User.all.each do |user|
+      current_user.projects.each do |project|
+        if (project.users.include?(user)) && !(users_record.include?(user))
+          @users << {"#{user.id}":true}
+          users_record << user
+        end
+      end
+      if !(users_record.include?(user))
+        @users << {"#{user.id}":false}
+      end
+    end
   end
 
   def new
@@ -24,6 +36,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    @access_to_email = false
+    current_user.projects.each do |project|
+      if (project.users.include?(@user))
+        @access_to_email = true
+      end
+    end
   end
 
   def edit
@@ -58,6 +76,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def find_params
     @user = User.find(params[:id])
   end

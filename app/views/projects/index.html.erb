@@ -15,8 +15,6 @@
   </thead>
 
   <tbody>
-    <% puts "HELLO"*10 %>
-    <% puts @filtered_projects %>
     <% @filtered_projects.each do |row| %>
       <% row.each do |project_id, owner_boolean| %>
         <% project = Project.find(project_id.to_s.to_i) %>

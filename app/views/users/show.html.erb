@@ -18,7 +18,7 @@
           <dd><%= @user.first_name %></dd>
           <dt><strong>Last Name: </strong></dt>
           <dd><%= @user.last_name %></dd>
-          <% if @current_user_authentication %>
+          <% if @access_to_email %>
             <dt><strong>Email: </strong></dt>
             <dd><%= mail_to @user.email %></dd>
           <% end %>
