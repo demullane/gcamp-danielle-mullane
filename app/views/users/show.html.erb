@@ -1,6 +1,6 @@
       <div class = "page-header">
         <div class = "pull-right">
-          <% if current_user && @user.id == current_user.id %>
+          <% if @current_user_authentication %>
             <%= link_to "Edit", edit_user_path(@user), class: "btn btn-info" %>
             <%= link_to "Delete", @user, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
@@ -18,6 +18,8 @@
           <dd><%= @user.first_name %></dd>
           <dt><strong>Last Name: </strong></dt>
           <dd><%= @user.last_name %></dd>
-          <dt><strong>Email: </strong></dt>
-          <dd><%= mail_to @user.email %></dd>
+          <% if @current_user_authentication %>
+            <dt><strong>Email: </strong></dt>
+            <dd><%= mail_to @user.email %></dd>
+          <% end %>
       </dl>

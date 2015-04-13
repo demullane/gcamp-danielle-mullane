@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :authenticate
-  before_action :find_params, only: [:show, :edit, :update, :destroy]
+  before_action :find_params, only: [:show, :edit, :update, :destroy, :remove_action_authentication]
+  before_action :remove_action_authentication, only: [:show, :edit, :update, :destroy]
   before_action :current_user_auth, only: [:edit, :update, :destroy]
 
   def index
@@ -72,8 +73,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_action_authentication
+    @current_user_authentication = (current_user.id == @user.id)
+  end
+
   def current_user_auth
-    raise CurrentUserAuthentication unless (current_user.id == @user.id)
+    raise CurrentUserAuthentication unless @current_user_authentication
   end
 
 end
