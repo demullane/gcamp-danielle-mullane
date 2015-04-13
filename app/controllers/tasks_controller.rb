@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_project
+  before_action :member_authentication, only: [:index, :show, :edit, :update, :destroy]
 
   def index
     @tasks = Task.all
@@ -73,6 +74,12 @@ class TasksController < ApplicationController
       redirect_to '/signin' unless current_user
       if !current_user
         flash[:notice] = "You must sign in first."
+      end
+    end
+
+    def member_authentication
+      unless @project.users.include?(current_user)
+        redirect_to projects_path, alert: "You do not have access."
       end
     end
 
