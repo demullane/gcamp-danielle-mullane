@@ -10,13 +10,12 @@
 
 <%= render 'error' %>
 
-<%= render 'form' %>
-
-<table>
-  <tbody>
-    <% @project.memberships.each do |m| %>
-      <% @membership = Membership.find(m.id) %>
-      <%= render 'edit_form' %>
-    <% end %>
-  </tbody>
-</table>
+<% if @role_authentication %>
+  <%= render 'form' %>
+<% end %>
+      
+<% if @role_authentication %>
+  <%= render 'edit_form' %>
+<% else %>
+  <%= render 'membership_listing' %>
+<% end %>

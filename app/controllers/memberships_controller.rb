@@ -4,7 +4,9 @@
   before_action :set_project
   before_action :set_membership, only: [:update, :destroy]
   before_action :check_last_owner, only: [:update]
-  before_action :member_authentication, only: [:index, :create, :update, :destroy]
+  before_action :remove_action_authentication
+  before_action :role_authentication, only: [:update, :destroy]
+  before_action :member_authentication
 
   def index
     @membership = Membership.new
@@ -63,8 +65,19 @@
       end
     end
 
+    def remove_action_authentication
+      @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{|hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")})
+      @member_authentication = @project.users.include?(current_user)
+    end
+
+    def role_authentication
+      unless @role_authentication
+        redirect_to project_memberships_path(@project), alert: "You do not have access."
+      end
+    end
+
     def member_authentication
-      unless @project.users.include?(current_user)
+      unless @member_authentication
         redirect_to projects_path, alert: "You do not have access."
       end
     end
