@@ -78,7 +78,7 @@ class TasksController < ApplicationController
     end
 
     def member_authentication
-      unless @project.users.include?(current_user)
+      unless @project.users.include?(current_user) || current_user.admin
         redirect_to projects_path, alert: "You do not have access."
       end
     end

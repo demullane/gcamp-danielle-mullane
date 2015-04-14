@@ -73,8 +73,8 @@
     end
 
     def remove_action_authentication
-      @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{|hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")})
-      @member_authentication = @project.users.include?(current_user)
+      @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{|hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")}) || current_user.admin
+      @member_authentication = @project.users.include?(current_user) || current_user.admin
     end
 
     def role_authentication

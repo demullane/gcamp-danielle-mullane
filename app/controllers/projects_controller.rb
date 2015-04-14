@@ -10,7 +10,9 @@ class ProjectsController < ApplicationController
     @projects = Project.all
     @filtered_projects = []
     @projects.each do |project|
-      if project.users.include?(current_user)
+      if current_user.admin
+        @filtered_projects << {"#{project.id}": true}
+      elsif project.users.include?(current_user)
         if (project.memberships.find{ |hash| (hash["project_id"] == project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")})
           @filtered_projects << {"#{project.id}": true}
         else
@@ -84,8 +86,8 @@ class ProjectsController < ApplicationController
   end
 
   def remove_action_authentication
-    @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{|hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")})
-    @member_authentication = @project.users.include?(current_user)
+    @role_authentication = @project.users.map{|user| (user.id == current_user.id)} && (@project.memberships.find{|hash| (hash["project_id"] == @project.id) && (hash["user_id"] == current_user.id) && (hash["role"] == "Owner")}) || current_user.admin
+    @member_authentication = @project.users.include?(current_user) || current_user.admin
   end
 
   def role_authentication

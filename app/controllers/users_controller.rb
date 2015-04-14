@@ -11,12 +11,12 @@ class UsersController < ApplicationController
     @users = []
     users_record = []
     User.all.each do |user|
-      if (user.id == current_user.id)
+      if (user.id == current_user.id) || current_user.admin
         @users << {"#{user.id}":true}
         users_record << user
       end
       current_user.projects.each do |project|
-        if (project.users.include?(user)) && !(users_record.include?(user))
+        if project.users.include?(user) && !(users_record.include?(user))
           @users << {"#{user.id}":true}
           users_record << user
         end
@@ -94,16 +94,16 @@ class UsersController < ApplicationController
   end
 
   def remove_action_authentication
-    @current_user_authentication = (current_user.id == @user.id)
+    @user_action_authentication = (current_user.id == @user.id) || current_user.admin
   end
 
   def current_user_auth
-    raise CurrentUserAuthentication unless @current_user_authentication
+    raise CurrentUserAuthentication unless @user_action_authentication
   end
 
   def email_access
     @access_to_email = false
-    if current_user == @user
+    if current_user == @user || current_user.admin
       @access_to_email = true
     else
       current_user.projects.each do |project|
