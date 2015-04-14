@@ -1,21 +1,20 @@
-      <div class = "page-header">
-        <h1>Frequently Asked Questions</h1>
-      </div>
+<div class = "page-header">
+  <h1>Frequently Asked Questions</h1>
+</div>
 
-      <ul>
-        <% @questionscomb.each do |arr| %>
-          <li><%= link_to arr.question, "#" + arr.slug %></li>
-        <% end %>
-      </ul>
+<ul>
+  <% @questionscomb.each do |arr| %>
+    <li><%= link_to arr.question, "#" + arr.slug %></li>
+  <% end %>
+</ul>
 
-
-      <% @questionscomb.each do |arr| %>
-        <div class = "row">
-          <div class = "col-md-6">
-            <a id = "<%= arr.slug %>"></a>
-            <p><strong><%= arr.question %></strong></p>
-            <p><%= arr.answer %></p>
-            <p style = "text-decoration: underline"><%= link_to "Top", "#top" %></p>
-          </div>
-        </div>
-      <% end %>
+<% @questionscomb.each do |arr| %>
+  <div class = "row">
+    <div class = "col-md-6">
+      <a id = "<%= arr.slug %>"></a>
+      <p><strong><%= arr.question %></strong></p>
+      <p><%= arr.answer %></p>
+      <p style = "text-decoration: underline"><%= link_to "Top", "#top" %></p>
+    </div>
+  </div>
+<% end %>

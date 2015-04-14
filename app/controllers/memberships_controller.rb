@@ -61,7 +61,7 @@
     def authenticate
       redirect_to '/signin' unless current_user
       if !current_user
-        flash[:notice] = "You must sign in first."
+        flash[:alert] = "You must sign in first."
       end
     end
 
