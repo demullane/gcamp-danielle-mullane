@@ -79,6 +79,8 @@
           <div class = "row">
             <% if !marketing_page %>
               <center><div class = "col-md-12">
+                <%= link_to "Home", root_path %>
+                |
                 <%= link_to "About", about_path %>
                 |
                 <%= link_to "Terms", terms_path %>
@@ -93,6 +95,12 @@
                 <%= link_to "Terms", terms_path %>
                 |
                 <%= link_to "FAQ", faq_path %>
+                <% if current_user %>
+                  |
+                  <%= link_to "Users", users_path %>
+                  |
+                  <%= link_to "Projects", projects_path %>
+                <% end %>
               </div>
 
               <div class = "col-md-6 text-right">
