@@ -16,30 +16,24 @@ describe 'User can signup and is added to user table' do
   end
 
   scenario 'User can signup' do
-
     expect(page).to have_content("Danielle Test")
     expect(page).to have_content("New Project")
     expect(page).to have_content("You have successfully signed up.")
-
   end
 
   scenario 'Once user is signedup user is added to user table' do
-
     click_on "Users"
 
     expect(page).to have_content("Users")
     expect(page).to have_content("dt@email.com")
-
   end
 
   scenario 'User can signout successfully' do
-
     click_on "Sign Out"
 
     expect(page).to have_content("You have successfully logged out.")
     expect(page).to_not have_content("Projects")
     expect(page).to_not have_content("Users")
-
   end
 
 end
