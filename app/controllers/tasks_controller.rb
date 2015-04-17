@@ -3,17 +3,20 @@ class TasksController < ApplicationController
   before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :set_project
-  before_action :member_authentication, only: [:index, :show, :edit, :update, :destroy]
+  before_action :member_authentication
 
   def index
-    @tasks = Task.all
+    @tasks = []
+    Task.all.each do |task|
+      if task.project_id == @project.id
+        @tasks << task
+      end
+    end
   end
 
   def show
     @comment = Comment.new
-    @comments = @task.comments.each do |comment|
-      comment.user_exist_check
-    end
+    @comments = @task.comments
   end
 
   def new

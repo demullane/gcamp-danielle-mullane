@@ -21,7 +21,7 @@
     <div class = "form-group">
       <div class = "col-md-offset-2 col-md-4">
         <%= f.submit "Create Task", class: "btn btn-primary" %>
-        <%= link_to "Cancel", "/tasks", class: "btn btn-default" %>
+        <%= link_to "Cancel", project_tasks_path(@project), class: "btn btn-default" %>
       </div>
     </div>
   <% else %>
@@ -34,7 +34,7 @@
     <div class = "form-group">
       <div class = "col-md-offset-2 col-md-4">
         <%= f.submit "Update Task", class: "btn btn-primary" %>
-        <%= link_to "Cancel", "/tasks", class: "btn btn-default" %>
+        <%= link_to "Cancel", project_tasks_path(@project), class: "btn btn-default" %>
       </div>
     </div>
   <% end %>
