@@ -51,7 +51,7 @@ describe ProjectsController do
       expect(flash[:alert]).to match("You must sign in first.")
     end
 
-    it "routes /projects to the new action in the projects controller " do
+    it "routes /projects to the new action in the projects controller" do
       session[:user_id] = @user.id
       expect(:get => "/projects/new").to route_to(:controller => "projects", :action => "new")
     end

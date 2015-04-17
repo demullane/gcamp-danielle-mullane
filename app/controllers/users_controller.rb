@@ -72,6 +72,7 @@ class UsersController < ApplicationController
       session.clear
       redirect_to root_path, notice: "You have successfully deleted your account."
     else
+      @user.destroy
       redirect_to users_path, notice: "User was successfully destroyed."
     end
   end
