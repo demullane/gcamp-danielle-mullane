@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
     get '/about' => 'about#index'
-    get '/terms' => 'terms#index'
+    # get '/terms' => 'terms#index'
     get '/faq' => 'faq#index'
     get '/tasks' => 'tasks#index'
     get '/users' => 'users#index'

@@ -11,6 +11,15 @@ footer {
   border-top: 1px solid #ccc;
 }
 
+.panel-primary {
+  border-color: #7b7c7c;
+}
+
+.panel-primary > .panel-heading {
+  background-color: #7b7c7c;
+  border-color: #7b7c7c;
+}
+
 tr.membership-form > td {
   padding-bottom: 10px;
 }

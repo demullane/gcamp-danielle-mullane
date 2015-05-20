@@ -4,7 +4,7 @@
 
     <%= favicon_link_tag 'favicon.ico' %>
 
-    <title>Danielle gSchool</title>
+    <title>Task-Me</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -16,9 +16,9 @@
       <div class = "container">
         <div class = "navbar-header">
           <% if !marketing_page %>
-            <%= link_to "gCamp", projects_path, class: "navbar-brand" %>
+            <%= link_to "Task-Me", projects_path, class: "navbar-brand" %>
           <% else %>
-            <%= link_to "gCamp", root_path, class: "navbar-brand" %>
+            <%= link_to "Task-Me", root_path, class: "navbar-brand" %>
           <% end %>
         </div>
         <% if !marketing_page %>
@@ -44,7 +44,6 @@
           <% else %>
             <li><%= link_to "Sign Up", signup_path %></li>
             <li><%= link_to "Sign In", signin_path %></li>
-            <!--<li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>-->
           <% end %>
         </ul>
       </div>
@@ -82,8 +81,8 @@
                 <%= link_to "Home", root_path %>
                 |
                 <%= link_to "About", about_path %>
-                |
-                <%= link_to "Terms", terms_path %>
+                <!-- |
+                <#%= link_to "Terms", terms_path %> -->
                 |
                 <%= link_to "FAQ", faq_path %>
               </div></center>
@@ -92,8 +91,8 @@
               <div class = "col-md-6">
                 <%= link_to "About", about_path %>
                 |
-                <%= link_to "Terms", terms_path %>
-                |
+                <!-- <#%= link_to "Terms", terms_path %>
+                | -->
                 <%= link_to "FAQ", faq_path %>
                 <% if current_user %>
                   |
